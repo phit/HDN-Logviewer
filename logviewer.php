@@ -29,12 +29,13 @@
 	<body>
 		<div class="dat">
 			Title/Navigation whatever
+		</div>
 		<div class="dat">
 <?php
 @ini_set("memory_limit","128M");
 
 // SET PATH TO YOUR LOG DIRECTORY HERE
-define('LOG_DIR', '.\logsmain\\');
+define('LOG_DIR', '.\logs\\');
 
 function GetFriendID($authString)
 {
