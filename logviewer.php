@@ -79,26 +79,24 @@ if(count($history[$year][$month][$day])>0)
 			echo $items[1]." &lt;Console&gt;: ".str_replace("<","&lt;",str_replace(">","&gt;",$items[4]))."<br>\r\n";
 		
 		// Player Join messages
-		elseif(ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"(.+)<[0-9]+><(STEAM_[0-9]{1}:[0-9]{1}:[0-9]+)><>\" entered the game", $item, $items))
+		elseif($_GET['join'] !== "1" && ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"(.+)<[0-9]+><(STEAM_[0-9]{1}:[0-9]{1}:[0-9]+)><>\" entered the game", $item, $items))
 			echo $items[1]." &lt;<a href='http://steamcommunity.com/profiles/".GetFriendID($items[3])."' target='_blank'>".str_replace("<","&lt;",str_replace(">","&gt;",$items[2]))."</a>&gt; entered the game<br>\r\n";
 		
 		// Ignore Bot Join messages (could be merged with Bot Leave)
-		elseif(ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"Bot[0-9]+<[0-9]+><BOT><>\" entered the game", $item, $items))
+		elseif($_GET['join'] !== "1" && ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"Bot[0-9]+<[0-9]+><BOT><>\" entered the game", $item, $items))
 			echo "";
 		
 		// Ignore Bot Leave messages
-		elseif(ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"Bot[0-9]+<[0-9]+><BOT><[A-Za-z]+>\" disconnected (.*)", $item, $items))
+		elseif($_GET['join'] !== "1" && ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"Bot[0-9]+<[0-9]+><BOT><[A-Za-z]+>\" disconnected (.*)", $item, $items))
 			echo "";			
 		
 		// Player Leaves
-		elseif(ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"(.+)<[0-9]+><(STEAM_[0-9]{1}:[0-9]{1}:[0-9]+)><(.*)>\" disconnected (.*)", $item, $items))
+		elseif($_GET['join'] !== "1" && ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"(.+)<[0-9]+><(STEAM_[0-9]{1}:[0-9]{1}:[0-9]+)><(.*)>\" disconnected (.*)", $item, $items))
 			echo $items[1]." &lt;<a href='http://steamcommunity.com/profiles/".GetFriendID($items[3])."' target='_blank'>".str_replace("<","&lt;",str_replace(">","&gt;",$items[2]))."</a>&gt; disconnected ".str_replace("<","&lt;",str_replace(">","&gt;",$items[5]))."<br>\r\n";
 		
-		//output anyways if i forgot something with a regex (testcode)
-		/*
-		elseif($item)
+		// output if url parameter ?debug=1
+		elseif($item && $_GET['debug'] == "1")
 			echo "".$item."<br>";
-		*/
 }
 else
 	echo "Nothing found (I probably fucked up or it's midnight)";
