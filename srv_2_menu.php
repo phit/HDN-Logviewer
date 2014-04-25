@@ -18,7 +18,7 @@ echo date('F Y');
 $num_of_days = date('d');    
 for( $i=1; $i<= $num_of_days; $i++)
 {
- echo '<a target="chat" href="srv_2.php?y='.date('Y').'&m='.date('n').'&d='. str_pad($i,2,'0', STR_PAD_LEFT).'">'. str_pad($i,2,'0', STR_PAD_LEFT).'-'.date('m-Y').'</a><br>'; 
+ echo '- <a target="chat" href="srv_2.php?y='.date('Y').'&m='.date('n').'&d='. str_pad($i,2,'0', STR_PAD_LEFT).'">'. str_pad($i,2,'0', STR_PAD_LEFT).'.'.date('m.Y').'</a><br>'; 
 }
 
 
