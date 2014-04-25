@@ -1,0 +1,14 @@
+
+* {
+    font-size:         8pt;
+    font-family:       verdana;
+}
+
+a         { color: #1122AA; text-decoration: underline; }
+a:visited { color: #1122AA; }
+a:hover   { text-decoration: underline; }
+a:active  { text-decoration: underline; }
+
+#rfloat {
+ float:right;
+}
