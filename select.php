@@ -12,7 +12,7 @@
 <b>Select Server</b>
 <hr color="000000">
 
-<a href="srv_1.php" target="chat" onClick="parent.days.location='mainmenu.php'">Main Server</a><br>
-<a href="srv_2.php" target="chat" onClick="parent.days.location='physmenu.php'">Phys Server</a>
+<a href="srv_1.php" target="chat" onClick="parent.days.location='srv_1_menu.php'">Main Server</a><br>
+<a href="srv_2.php" target="chat" onClick="parent.days.location='srv_2_menu.php'">Phys Server</a>
 
 </body>
