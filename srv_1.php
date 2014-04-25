@@ -48,11 +48,11 @@ if(count($history[$year][$month][$day])>0)
 		// messy regex with deprecated function ._.
 		// All Chat messages
 		if(ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"(.+)<[0-9]+><(STEAM_[0-9]{1}:)([0-9]{1}:[0-9]+)><[A-Za-z]+>\" (say) \"(.*)\"", $item, $items))
-			echo "[".$items[1]."] <a href='http://steamcommunity.com/profiles/".GetFriendID($items[3]&&$items[4])."' target='_blank'>".str_replace("<","&lt;",str_replace(">","&gt;",$items[2]))."</a> ( ".$items[4]." ) : ".str_replace("<","&lt;",str_replace(">","&gt;",$items[6]))."<br>\r\n";
+			echo "[".$items[1]."] <a href='http://steamcommunity.com/profiles/".GetFriendID($items[3] . $items[4])."' target='_blank'>".str_replace("<","&lt;",str_replace(">","&gt;",$items[2]))."</a> ( ".$items[4]." ) : ".str_replace("<","&lt;",str_replace(">","&gt;",$items[6]))."<br>\r\n";
 		
 		// Team Chat messages
 		elseif(ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"(.+)<[0-9]+><(STEAM_[0-9]{1}:)([0-9]{1}:[0-9]+)><[A-Za-z]+>\" (say_team) \"(.*)\"", $item, $items))
-			echo "[".$items[1]."] [T] <a href='http://steamcommunity.com/profiles/".GetFriendID($items[3]&&$items[4])."' target='_blank'>".str_replace("<","&lt;",str_replace(">","&gt;",$items[2]))."</a> ( ".$items[4]." ) : ".str_replace("<","&lt;",str_replace(">","&gt;",$items[6]))."<br>\r\n";
+			echo "[".$items[1]."] [T] <a href='http://steamcommunity.com/profiles/".GetFriendID($items[3] . $items[4])."' target='_blank'>".str_replace("<","&lt;",str_replace(">","&gt;",$items[2]))."</a> ( ".$items[4]." ) : ".str_replace("<","&lt;",str_replace(">","&gt;",$items[6]))."<br>\r\n";
 		
 		// Console Chat messages
 		elseif(ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"(.+)<0><Console><Console>\" (say) \"(.*)\"", $item, $items))
