@@ -7,7 +7,7 @@ Tested on a Windows IIS webserver. Based on https://forums.alliedmods.net/showpo
 
 Required CVAR's
 
-// Log settings
-log 1 // Turn on logging
-sv_log_onefile 0 // Log server information to only one file.
-sv_logflush 1 // Flush the log file to disk on each write (slow).
+// Log settings  
+log 1 // Turn on logging  
+sv_log_onefile 0 // Log server information to only one file.  
+sv_logflush 1 // Flush the log file to disk on each write (slow).  
