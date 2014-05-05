@@ -24,7 +24,7 @@ $year2 = empty($_GET['y']) ? date("Y") : $_GET['y'];
 $month2 = empty($_GET['m']) ? date("n") : $_GET['m'];
 $day2 = empty($_GET['d']) ? date("j") : $_GET['d'];
 
-echo '<b>Physics Server Chat Logs for '.$day2.'.'.($month2<10?"0".$month2:$month2).'.'.$year2.' - Timezone UTC + 2 hours </b><b id="rfloat"><a href="javascript:history.go(0)">refresh the page</a></b>';
+echo '<b>Physics Server Chat Logs for '.($day2<10?"0".$day2:$day2).'.'.($month2<10?"0".$month2:$month2).'.'.$year2.' - Timezone UTC + 2 hours </b><b id="rfloat"><a href="javascript:history.go(0)">refresh the page</a></b>';
 echo '<hr color="000000">';
 $year = !empty($_GET['y']) ? (int)$_GET['y'] : (int)date("Y");
 $month = !empty($_GET['m']) ? (int)$_GET['m'] : (int)date("n");
