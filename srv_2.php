@@ -26,6 +26,7 @@ $day2 = empty($_GET['d']) ? date("j") : $_GET['d'];
 
 echo '<b>Physics Server Chat Logs for '.($day2<10?"0".$day2:$day2).'.'.($month2<10?"0".$month2:$month2).'.'.$year2.' - Timezone UTC + 2 hours </b><b id="rfloat"><a href="javascript:history.go(0)">refresh the page</a></b>';
 echo '<hr color="000000">';
+
 $year = !empty($_GET['y']) ? (int)$_GET['y'] : (int)date("Y");
 $month = !empty($_GET['m']) ? (int)$_GET['m'] : (int)date("n");
 $day = !empty($_GET['d']) ? (int)$_GET['d'] : (int)date("j");
@@ -36,7 +37,7 @@ while($file = readdir($dir))
 	{
 		$lines = file(LOG_DIR.$file);
 		foreach($lines as $line)
-			if(strpos(strtolower($line), ">\" say \"")!==FALSE || strpos(strtolower($line), ">\" say_team \"")!==FALSE || strpos(strtolower($line), ">\" entered the game")!==FALSE || strpos(strtolower($line), ">\" disconnected ")!==FALSE)
+			if(strpos(strtolower($line), ">\" say \"")!==FALSE || strpos(strtolower($line), ">\" say_team \"")!==FALSE || strpos(strtolower($line), ">\" entered the game")!==FALSE || strpos(strtolower($line), ">\" disconnected ")!==FALSE || strpos(strtolower($line), ">\" killed ")!==FALSE)
 				$history[(int)substr($line, 8, 4)][(int)substr($line, 2, 2)][(int)substr($line, 5, 2)][] = substr($line, 15);
 	}
 
@@ -72,6 +73,10 @@ if(count($history[$year][$month][$day])>0)
 		// Player Leaves
 		elseif($_GET['join'] !== "1" && ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"(.+)<[0-9]+><(STEAM_[0-9]{1}:)([0-9]{1}:[0-9]+)><(.*)>\" disconnected (.*)", $item, $items))
 			echo "[".$items[1]."] <span style=\"color: #b77\"><i>Player <span style=\"color: #000;\">".str_replace("<","&lt;",str_replace(">","&gt;",$items[2]))."</span> ( <span style=\"color: #000;\">".$items[4]."</span> ) left the server ".$items[6]."</i></span><br>\r\n";
+
+		// Kills
+		elseif(ereg("([0-9]{2}:[0-9]{2}:[0-9]{2}): \"(.+)<[0-9]+><(STEAM_[0-9]{1}:)([0-9]{1}:[0-9]+)><(.*)>\" killed \"(.+)<[0-9]+><(STEAM_[0-9]{1}:)([0-9]{1}:[0-9]+)><(.*)>\" with \"(.*)\"", $item, $items))
+			echo "[".$items[1]."] [".$items[5]."] <a href='http://steamcommunity.com/profiles/".GetFriendID($items[3] . $items[4])."' target='_blank'>".str_replace("<","&lt;",str_replace(">","&gt;",$items[2]))."</a> ( ".$items[4]." ) <span style=\"color: #FF7F50\"><i>killed</i></span> [".$items[9]."] <a href='http://steamcommunity.com/profiles/".GetFriendID($items[7] . $items[8])."' target='_blank'>".str_replace("<","&lt;",str_replace(">","&gt;",$items[6]))."</a> ( ".$items[8]." )<br>\r\n";
 		
 		// output if url parameter ?debug=1
 		elseif($item && $_GET['debug'] == "1")
